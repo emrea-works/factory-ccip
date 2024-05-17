@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8;
+pragma solidity 0.8.20;
 
 // Imports for Factory
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
@@ -67,6 +67,26 @@ contract CopyTraderFactory is CCIPReceiver, ReentrancyGuard {
         Message message; // message data
         address token; // received token.
         uint256 amount; // received amount.
+    }
+
+    enum MessageStatus { Created, InProgress, Completed, Canceled }
+
+    struct Message {
+        uint256 messageId;
+        address sender; 
+        address receiver; 
+        uint256 amount; 
+        address fromCurrency; 
+        string toCurrency; 
+        Network target;
+        MessageStatus status; 
+    } 
+
+    struct Network {
+        string name;
+        address router; // Other Message Contract or EOA of an agent
+        uint64 selector; // destinationChainSelector
+        address messageContract;
     }
 
 
@@ -146,26 +166,6 @@ contract CopyTraderFactory is CCIPReceiver, ReentrancyGuard {
         
         // Return the message ID
         return messageId;
-    }
-
-    enum MessageStatus { Created, InProgress, Completed, Canceled }
-
-    struct Message {
-        uint256 messageId;
-        address sender; 
-        address receiver; 
-        uint256 amount; 
-        address fromCurrency; 
-        string toCurrency; 
-        Network target;
-        MessageStatus status; 
-    } 
-
-    struct Network {
-        string name;
-        address router; // Other Message Contract or EOA of an agent
-        uint64 selector; // destinationChainSelector
-        address messageContract;
     }
 
 
