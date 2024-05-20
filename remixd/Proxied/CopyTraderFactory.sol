@@ -22,12 +22,17 @@ import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol
 contract MyCopyTrader is Initializable {
     
     address public owner;
+    bool isOwned;
 
-    function initialize(address _owner) public {
-        owner = _owner;
+    modifier onlyWhenOwned (){
+        require(isOwned == false, "This contract has already been owned.");
+        _;
     }
 
-    constructor() initializer {}
+    function initialize(address _owner) public onlyWhenOwned {
+        owner = _owner;
+        isOwned = true;
+    }
 
     function returnAddress() public view returns(address) {
         return address(this);
