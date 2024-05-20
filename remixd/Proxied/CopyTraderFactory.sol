@@ -27,6 +27,8 @@ contract MyCopyTrader is Initializable {
         owner = _owner;
     }
 
+    constructor() initializer {}
+
     function returnAddress() public view returns(address) {
         return address(this);
     }
