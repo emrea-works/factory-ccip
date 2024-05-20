@@ -1,4 +1,8 @@
 //SPDX-License-Identifier: MIT
+// deployed at: 0x9134ec8d1886008ab2a591cfde0eab81f627a85f
+// deployed as: 0x187ae0156b54af7031d56ca9121b9d6a80fd3fac58eb7f86580bd692c2c657bd
+// trader deployed as: 0x4c867b81f774306cbfadc7cf0c2fd4ae422b7ef3a2971ab71d6e6dd0199619a5
+// trader deployed at: 0x9E789e84a731520Bb5918Fe604E39e81CF415f5e
 pragma solidity 0.8.20;
 
 // Imports for Factory
@@ -17,7 +21,7 @@ import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol
 
 contract MyCopyTrader is Initializable {
     
-    address public owner;    
+    address public owner;
 
     function initialize(address _owner) public {
         owner = _owner;
